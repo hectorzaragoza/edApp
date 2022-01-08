@@ -14,7 +14,7 @@ with open('LICENSE.md') as f:
     LICENSE = f.read()
 
 setup(
-    name='django-auth-template',
+    name='ed_app',
     version='0.1.0',
     description='GA SEI Boston Django Authentication Template',
     long_description=README,
