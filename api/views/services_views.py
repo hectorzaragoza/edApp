@@ -16,3 +16,13 @@ class AllServices(generics.ListCreateAPIView):
         data = ServicesSerializer(services, many=True).data
         print('data', data)
         return Response({ 'services': data })
+
+class ClientDetail(generics.ListAPIView):
+    IsAuthenticated = ()
+    permission_classes = ()
+    serializer_class = ServicesSerializer
+    def get(self, request):
+        services = Services.objects.filter(owner=request.user.id)
+        # Run the data through the serializer
+        data = ServicesSerializer(services, many=True).data
+        return Response({ 'services': data })
