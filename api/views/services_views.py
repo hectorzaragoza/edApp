@@ -12,7 +12,7 @@ class AllServices(generics.ListCreateAPIView):
         # Get all the services offered:
         services = Services.objects.all()
         # Run the data through the serializer
-        print('These are my existing services', services)
+        # print('These are my existing services', services)
         data = ServicesSerializer(services, many=True).data
         print('data', data)
         return Response({ 'services': data })
@@ -25,4 +25,5 @@ class ClientDetail(generics.ListAPIView):
         services = Services.objects.filter(owner=request.user.id)
         # Run the data through the serializer
         data = ServicesSerializer(services, many=True).data
+        print('User Owned Services: ', data)
         return Response({ 'services': data })
