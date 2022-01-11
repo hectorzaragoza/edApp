@@ -129,6 +129,9 @@ REST_FRAMEWORK = {
     ]
 }
 
+CHECKOUT_URL_REDIRECT = 'http://localhost:3000/services/'
+
+STRIPE_SECRET_KEY = 'sk_test_51KGaEHHRuIv0fDSugBmVf8Amj7oLaiVCMDVyYv6kKEfXDuFtDvh2cxHc1wr8s77Oh5mmd30VEwGuOh2u2RHA4qSi00otKUraWT'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
