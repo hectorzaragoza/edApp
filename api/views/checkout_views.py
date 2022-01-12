@@ -1,10 +1,13 @@
 # Import key from project settings
+from json.encoder import JSONEncoder
 from django.conf import settings
+from django.http.request import QueryDict
 
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from django.shortcuts import redirect
+
 
 import stripe
 # This is your test secret API key.
@@ -16,6 +19,11 @@ class StripeCheckoutView(APIView):
     authentication_classes = ()
     permission_classes = ()
     def post(self, request):
+        # This gets me the objects to match the User Selected Services Passed Down by State from React FE
+        # with the array of objects I will create here to store the KV of service name and Price ID from Stripe
+        for key, value in QueryDict.items(request.data):
+            print(key)
+            print(value)
         try:
             checkout_session = stripe.checkout.Session.create(
                 line_items=[
@@ -33,7 +41,6 @@ class StripeCheckoutView(APIView):
                 success_url=settings.CHECKOUT_URL_REDIRECT + '?success=true&session_id={CHECKOUT_SESSION_ID}',
                 cancel_url=settings.CHECKOUT_URL_REDIRECT+ '?canceled=true',
             )
-
             return redirect(checkout_session.url)
         except:
             return Response(
